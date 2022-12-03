@@ -1,7 +1,5 @@
 package com.dondapati.learn;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,7 +12,6 @@ public class SimpleRestApiApplication {
 	}
 
 	private static void forTest() {
-		System.out.println("Sample print");		
 	}
 	
 	
