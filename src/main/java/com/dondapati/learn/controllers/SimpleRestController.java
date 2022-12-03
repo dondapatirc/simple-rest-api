@@ -23,8 +23,8 @@ public class SimpleRestController {
 
 
 	@GetMapping(value = "/orders/{id}")
-	public OrderDTO getOrder(@PathVariable String orderId) {
-		return simpleRestService.getOrderDetails(orderId);
+	public OrderDTO getOrder(@PathVariable String id) {
+		return simpleRestService.getOrderDetails(id);
 	}
 
 }
