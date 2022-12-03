@@ -11,6 +11,5 @@ public class SimpleRestApiApplication {
 	}
 	
 	//TODO: This is an additional comment to test the github checkin process. 
-	//TODO: This is an additional comment to test the github checkin process.
 
 }
