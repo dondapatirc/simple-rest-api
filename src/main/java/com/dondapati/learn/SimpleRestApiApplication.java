@@ -8,12 +8,7 @@ public class SimpleRestApiApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SimpleRestApiApplication.class, args);
-		forTest();
 	}
-
-	private static void forTest() {
-	}
-	
 	
 
 }
