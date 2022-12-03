@@ -1,46 +1,26 @@
-def gv
 pipeline {
     agent any
-    parameters {
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-        booleanParam(name: 'executeTests', defaultValue: true, description: '')
-    }
 
     stages {
     
-    	stage("init") {
+    	stage("Quality Gate Status Check") {
             steps {
                 script {
-                	gv = load "script.groovy"
+                	withSonarQubeEnv('sonar-server') {
+                        sh "mvn sonar:sonar"
+
+                        timeout(time: 1, unit: 'HOURS') {
+                            def qg = waitForQualityGate()
+                            if(qg.status != 'OK') {
+                                error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                            }
+                        }
+
+                        sh "mvn clean install"
+                    }
                 }                
             }
         }
         
-        stage("build") {
-            steps {
-                script {
-                	gv.buildApp()
-                }                
-            }
-        }
-        stage("test") {
-            when {
-                expression {
-                    params.executeTests
-                }
-            }
-            steps {
-            	script {
-               		gv.testApp()
-               	}
-            }
-        }
-        stage('deploy') {
-            steps {
-            	script {
-                	gv.deployApp()
-                }
-            }
-        }
     }
 }
