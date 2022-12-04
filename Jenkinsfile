@@ -33,10 +33,10 @@ pipeline {
         stage ("Build") {
             steps {
                 script{
-                    bat 'docker build . -t dondapatirc\devops-training:Docker_tag'
+                    bat 'docker build . -t dondapatirc/devops-training:Docker_tag'
                     withCredentials([string(credentialsId: 'docker-token', variable: 'docker-token-ref')]) {
                         bat '''docker login -u dondapatirc -p $docker-token_ref
-                        docker push dondapatirc\devops-training:Docker_tag
+                        docker push dondapatirc/devops-training:Docker_tag
                         '''
                     }
                 }
