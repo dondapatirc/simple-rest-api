@@ -1,5 +1,13 @@
+def getDockerTag() {
+    def tag = bat script: 'git rev-parse HEAD' , returnStdout:true
+    return tag;
+}
 pipeline {
     agent any
+
+    environment {
+        Docker_tag = getDockerTag()
+    }
 
     stages {
     
@@ -13,10 +21,23 @@ pipeline {
                 }                
             }
         }
-        stage ("Quality Gate ") {
+
+        stage ("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
                     waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+        stage ("Build") {
+            steps {
+                script{
+                    docker build . -t dondapatirc\devops-training:Docker_tag
+                    withCredentials([string(credentialsId: 'docker-token', variable: 'docker-token-ref')]) {
+                        docker login -u dondapatirc -p $docker-token_ref
+                        docker push dondapatirc\devops-training:Docker_tag
+                    }
                 }
             }
         }
