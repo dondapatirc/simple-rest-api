@@ -23,6 +23,7 @@ class SimpleRestServiceImplTest {
 		OrderDTO order = simpleRestService.getOrderDetails("1");
 		
 		assertEquals("1", order.getOrderId());
+		assertEquals("OrderName1", order.getOrderName());		
 	}
 	
 	@Test
@@ -30,6 +31,7 @@ class SimpleRestServiceImplTest {
 		OrderDTO order = simpleRestService.mapToDTO();
 		
 		assertEquals("1", order.getOrderId());
+		assertEquals("OrderName1", order.getOrderName());	
 	}
 	
 }
