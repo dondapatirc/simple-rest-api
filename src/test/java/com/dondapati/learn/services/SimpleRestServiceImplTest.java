@@ -11,16 +11,23 @@ import com.dondapati.learn.dtos.OrderDTO;
 
 
 @ExtendWith(MockitoExtension.class)
-public class SimpleRestServiceImplTest {
+class SimpleRestServiceImplTest {
 	
 	@InjectMocks	
 	private SimpleRestServiceImpl simpleRestService;
 	
 	
 	@Test
-	public void getOrderDetails() {
+	void getOrderDetails() {
 		
 		OrderDTO order = simpleRestService.getOrderDetails("1");
+		
+		assertEquals("1", order.getOrderId());
+	}
+	
+	@Test
+	void mapToDTO() {
+		OrderDTO order = simpleRestService.mapToDTO();
 		
 		assertEquals("1", order.getOrderId());
 	}

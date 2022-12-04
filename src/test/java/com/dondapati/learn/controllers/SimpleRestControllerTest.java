@@ -9,12 +9,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.dondapati.learn.dtos.OrderDTO;
 import com.dondapati.learn.services.SimpleRestService;
 
 
 @ExtendWith(MockitoExtension.class)
-public class SimpleRestControllerTest {
+class SimpleRestControllerTest {
 	
 	@InjectMocks
 	SimpleRestController simpleRestController;
@@ -28,7 +27,7 @@ public class SimpleRestControllerTest {
 	}
 	
 	@Test
-	public void getOrder() {
+	void getOrder() {
 		simpleRestController.getOrder("1");
 		verify(simpleRestService).getOrderDetails("1");
 	}
